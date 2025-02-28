@@ -1,0 +1,173 @@
+  // script.js
+
+// Function to fetch weather data
+async function getWeather() {
+    const location = document.getElementById('location').value;
+    
+    if (location === "") {
+        alert("Please enter a location");
+        return;
+    }
+
+    const apiKey = "6ad593cfdf134984bf0191208252702";
+    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=yes`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        // Check if the location is valid
+        if (data.error) {
+            alert("Location not found, please try again.");
+            return;
+        }
+
+        // Get weather details
+        const locationName = data.location.name;
+        const temperature = data.current.temp_c;
+        const condition = data.current.condition.text;
+        const humidity = data.current.humidity;
+
+        // Update the UI with weather information
+        document.getElementById('location-name').innerText = locationName;
+        document.getElementById('temperature').innerText = `Temperature: ${temperature}°C`;
+        document.getElementById('condition').innerText = `Condition: ${condition}`;
+        document.getElementById('humidity').innerText = `Humidity: ${humidity}%`;
+
+        // Show weather info
+        document.getElementById('weather-info').style.display = "block";
+    } catch (error) {
+        console.error("Error fetching weather data", error);
+        alert("An error occurred while fetching the weather data. Please try again.");
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <input type="text" id="location" placeholder="Enter a location" />
+        <button onclick="getWeather()">Get Weather</button>
+        <div id="weather-info">
+            <h2 id="location-name"></h2>
+            <p id="temperature"></p>
+            <p id="condition"></p>
+            <p id="humidity"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 300px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#weather-info {
+    margin-top: 20px;
+    display: none;
+}
+
+#location-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+p {
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+// script.js
+
+// Function to fetch weather data
+async function getWeather() {
+    const location = document.getElementById('location').value;
+    
+    if (location === "") {
+        alert("Please enter a location");
+        return;
+    }
+
+    const apiKey = "6ad593cfdf134984bf0191208252702";
+    const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=yes`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        // Check if the location is valid
+        if (data.error) {
+            alert("Location not found, please try again.");
+            return;
+        }
+
+        // Get weather details
+        const locationName = data.location.name;
+        const temperature = data.current.temp_c;
+        const condition = data.current.condition.text;
+        const humidity = data.current.humidity;
+
+        // Update the UI with weather information
+        document.getElementById('location-name').innerText = locationName;
+        document.getElementById('temperature').innerText = `Temperature: ${temperature}°C`;
+        document.getElementById('condition').innerText = `Condition: ${condition}`;
+        document.getElementById('humidity').innerText = `Humidity: ${humidity}%`;
+
+        // Show weather info
+        document.getElementById('weather-info').style.display = "block";
+    } catch (error) {
+        console.error("Error fetching weather data", error);
+        alert("An error occurred while fetching the weather data. Please try again.");
+    }
+}
